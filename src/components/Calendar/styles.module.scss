@@ -22,6 +22,10 @@
 }
 .datePickWrapper {
     width: fit-content;
+
+    @include var.breakpoint("mobileLG") {
+        margin-bottom: 200px;   
+    }
     @include var.breakpoint("laptop") {
         margin-bottom: 100px;
     }
