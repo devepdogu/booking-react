@@ -9,11 +9,11 @@
 
 .datePickerContainer {
     transition: transform 400ms;
-    @include var.breakpoint("mobileSM") {
+    @include var.breakpoint("mobileLG") {
         width: 100%;
         & > div{
             width: calc(100% - 50px);
-            margin: auto;
+            margin: 0px auto 200px auto;
         }
     }
     &.openedDrawer {
@@ -23,9 +23,6 @@
 .datePickWrapper {
     width: fit-content;
 
-    @include var.breakpoint("mobileLG") {
-        margin-bottom: 200px;   
-    }
     @include var.breakpoint("laptop") {
         margin-bottom: 100px;
     }
