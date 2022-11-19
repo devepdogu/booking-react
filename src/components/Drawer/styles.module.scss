@@ -9,6 +9,10 @@ $drawerWidth: 500px;
     top: 0;
     z-index: 1;
     backdrop-filter: blur(5px);
+
+    @include var.breakpoint("mobileLG") {
+        width: 100%;
+    }
     background-color: rgba(17, 17, 26, 0.9);
 }
 .drawerWrapper {
@@ -19,6 +23,11 @@ $drawerWidth: 500px;
     position: fixed;
     max-width: $drawerWidth;
     height: calc(100% - 80px);
+    @include var.breakpoint("mobileLG") {
+        max-width: unset;
+        padding: 40px 25px;
+        width: -webkit-fill-available;
+    }
     width: 100%;
     padding: 40px 50px;
     box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
@@ -75,27 +84,37 @@ $drawerWidth: 500px;
         }
     }
 
-    
     .drawerActions {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap:20px;
+        gap: 20px;
+        @include var.breakpoint("mobileSM") {
+            flex-wrap: wrap;
+            gap:10px;
+        }
+        @include var.breakpoint("mobileLG") {
+            gap:10px;
+        }
         width: 100%;
-        .choosepayment{
-            background-color: var.getChooseColor(payment)!important;
-            
-            & , svg{
-                color:black;
+        .choosepayment {
+            background-color: var.getChooseColor(payment) !important;
+
+            &,
+            svg {
+                color: black;
             }
             font-weight: 500;
         }
         & > button {
+            @include var.breakpoint("mobileLG") {
+                font-size: .8rem;
+            }
             width: 100%;
         }
         margin-top: auto;
     }
-    
+
     .drawerClose {
         position: absolute;
         right: 30px;

@@ -337,7 +337,17 @@ const Months = ({
       .map((item) => item)
       .join(" ");
   }
-
+  const browserWidth = window.outerWidth;
+  const weekDays = [
+    "Pazartesi",
+    "Salı",
+    "Çarşamba",
+    "Perşembe",
+    "Cuma",
+    "Cumartesi",
+    "Pazar",
+  ];
+  const shortWeekDays = ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"];
   return (
     <div className={styles.monthWrapper}>
       <>
@@ -350,13 +360,11 @@ const Months = ({
           )}
         </div>
         <div className={styles.weekDaysWrapper}>
-          <div>Pazartesi</div>
-          <div>Salı</div>
-          <div>Çarşamba</div>
-          <div>Perşembe</div>
-          <div>Cuma</div>
-          <div>Cumartesi</div>
-          <div>Pazar</div>
+          {[...(browserWidth <= 620 ? shortWeekDays : weekDays)].map(
+            (day, i) => (
+              <div key={i}>{day}</div>
+            )
+          )}
         </div>
         <div className={styles.WeekMonthWrapper}>
           {data.data &&

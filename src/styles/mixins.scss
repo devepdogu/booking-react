@@ -1,4 +1,15 @@
-@use './variable' as var;
+@use "./variable" as var;
+@use "sass:map";
+
+@function getBreakpoint($name) {
+    @return map.get(var.$breakpoints, $name);
+}
+
+@mixin breakpoint($br) {
+    @media screen and (max-width: #{getBreakpoint($br)}px) {
+        @content;
+    }
+}
 
 @mixin button {
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
