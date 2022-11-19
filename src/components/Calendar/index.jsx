@@ -4,7 +4,7 @@ import { Button } from "src/components";
 import { ReactComponent as LeftArrow } from "src/assets/left.svg";
 import { ReactComponent as RightArrow } from "src/assets/right.svg";
 import { format } from "multi-date";
-import { DATE_FORMAT } from "src/config";
+import { DATE_FORMAT, MONTH_LIST } from "src/config";
 import { useCalendar, useDrawer } from "src/store";
 
 export const Calendar = ({
@@ -447,21 +447,6 @@ const getClass = (i, dates) => {
   return "";
 };
 
-const monthNames = [
-  "Ocak",
-  "Şubat",
-  "Mart",
-  "Nisan",
-  "Mayıs",
-  "Haziran",
-  "Temmuz",
-  "Ağustos",
-  "Eylül",
-  "Ekim",
-  "Kasım",
-  "Aralık",
-];
-
 function getDaysInMonth(
   month,
   year,
@@ -534,7 +519,7 @@ function getDaysInMonth(
   });
   const fillerArr = [0, 1, 2, 3, 4, 5, 6];
   const fillArr = [...fillerArr.slice(0, arr[0].time.getDay() - 1), ...arr];
-  return { month: monthNames[month], data: fillArr };
+  return { month: MONTH_LIST[month], data: fillArr };
 }
 
 const getAvgPrice = (data, details) => {

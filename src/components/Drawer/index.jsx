@@ -1,13 +1,15 @@
 import { useRef, useEffect } from "react";
 import { useCalendar, useDrawer } from "src/store";
 import { Button } from "src/components";
-import { X, CalendarPlus } from "phosphor-react";
+import { X, CalendarCheck } from "phosphor-react";
 import styles from "./styles.module.scss";
+import { format } from "multi-date";
 
+import { MONTH_LIST } from "src/config";
 export function Drawer() {
   const { opened, setOpened } = useDrawer();
   const drawerRef = useRef();
-
+  const priceMoreRef = useRef();
   useEffect(() => {
     const handleClickOutside = (event) =>
       drawerRef.current === event.target && setOpened(false);
@@ -21,6 +23,7 @@ export function Drawer() {
     setDates,
     setPendingPayments,
     getSelectedDateRanges,
+    dates,
   } = useCalendar();
   if (!opened) return;
   const totalData = getSelectedDatePrices();
@@ -39,7 +42,16 @@ export function Drawer() {
     setOpened();
     setDates({ checkin: "", checkout: "" });
   };
-
+  const checkin = new Date(dates.checkin);
+  const checkout = new Date(
+    dates.checkout !== ""
+      ? dates.checkout
+      : new Date(
+          checkin.getFullYear(),
+          checkin.getMonth(),
+          checkin.getDate() + 1
+        )
+  );
   return (
     <div className={styles.drawerContainer} ref={drawerRef}>
       <div className={styles.drawerWrapper}>
@@ -49,17 +61,44 @@ export function Drawer() {
         <p className={styles.drawerTitle}>
           Satın al <small>({totalData.count} gece)</small>
         </p>
-
         <div className={styles.drawerBody}>
-          {days &&
-            days.map((day, i) => (
-              <div key={i} className={styles.drawerDay}>
-                <CalendarPlus weight="bold" />
-                <p>
-                  {day.date} <span>(₺{day.price})</span>
-                </p>
-              </div>
-            ))}
+          <div className={styles.dayItem}>
+            {checkin.getDate()} {MONTH_LIST[checkin.getMonth()]}
+          </div>
+          <div className={styles.bodyArrow}>
+            <div>
+              <span
+                onMouseEnter={() =>
+                  priceMoreRef.current.classList.add(styles.arrowShowMore)
+                }
+                onMouseLeave={() =>
+                  priceMoreRef.current.classList.remove(styles.arrowShowMore)
+                }
+              >
+                {totalData.count} Gece
+              </span>
+              {totalData.count > 1 && (
+                <div className={styles.arrowMoreInfo} ref={priceMoreRef}>
+                  {days &&
+                    days.map((day, i) => {
+                      const date = new Date(day.date);
+                      return (
+                        <div key={i} className={styles.moreInfoDay}>
+                          <CalendarCheck weight="bold" />
+                          <p>
+                            {date.getDate()} {MONTH_LIST[date.getMonth()]}{" "}
+                            <span>(₺{day.price})</span>
+                          </p>
+                        </div>
+                      );
+                    })}
+                </div>
+              )}
+            </div>
+          </div>
+          <div className={styles.dayItem}>
+            {checkout.getDate()} {MONTH_LIST[checkout.getMonth()]}
+          </div>
         </div>
 
         <div className={styles.drawerActions}>

@@ -38,13 +38,9 @@ $drawerWidth: 500px;
     animation: drawer 400ms forwards;
 
     .drawerBody {
-        margin: 30px 0px;
-        overflow-y: scroll;
+        margin: auto 0px;
         width: 100%;
-        display: flex;
-        align-items: flex-start;
-        gap: 5px;
-        flex-direction: column;
+        padding: 5px 0px;
         &::-webkit-scrollbar-track {
             background-color: transparent;
         }
@@ -57,12 +53,114 @@ $drawerWidth: 500px;
         &::-webkit-scrollbar-thumb {
             background-color: var.getChooseColor(chosen);
         }
+        display: flex;
+        align-items: center;
+        .dayItem {
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: 500;
+            border-radius: 7.5px;
+            background-color: var.getChooseColor(chosen);
+            color: var.getChooseColor(checkInRange);
+            &:last-child {
+                background-color: var.getChooseColor(checkInOut);
+            }
+        }
+        .bodyArrow {
+            height: 3px;
+            flex: auto;
+            margin: 0px 50px;
+            background-image: linear-gradient(to right, var.getChooseColor(chosen), var.getChooseColor(checkInOut));
+            position: relative;
+            border-radius: 50px;
+            & > div {
+                position: absolute;
+                bottom: 100%;
+                font-weight: 600;
+                left: 50%;
+                font-size: 1.1rem;
+
+                color: var.getChooseColor(chosen);
+                transform: translateY(-10px) translateX(-50%);
+                & > .arrowMoreInfo {
+                    min-width: max-content;
+
+                    position: absolute;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: all 200ms;
+
+                    &.arrowShowMore {
+                        opacity: 1;
+                        visibility: visible;
+                        transform: translateX(-50%) translateY(40px) scale(1);
+                    }
+                    top: 100%;
+                    background-color: rgba(17, 17, 26, 0.98);
+                    padding: 20px 30px;
+                    left: 50%;
+                    transform: translateX(-50%) translateY(40px) scale(0.5);
+                    text-align: center;
+                    font-weight: 400;
+                    border-radius: 5px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    gap: 5px;
+                    .moreInfoDay {
+                        color: white;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 5px;
+                        font-size: 0.9rem;
+                        span {
+                            color: aquamarine;
+                        }
+                    }
+                    &::before {
+                        clip-path: polygon(100% 0, 0 0, 50% 100%);
+                        background-color: rgba(17, 17, 26, 0.918);
+                        content: "";
+                        position: absolute;
+                        bottom: 100%;
+                        left: 50%;
+                        transform: translateX(-50%) translateY(2px) rotate(180deg);
+                        width: 30px;
+                        height: 10px;
+                    }
+                }
+            }
+            &::before,
+            &::after {
+                background-color: var.getChooseColor(checkInOut);
+                width: 20px;
+                height: 100%;
+                content: "";
+                position: absolute;
+                right: 0;
+                top: 0;
+                border-radius: 50px;
+            }
+            &::before {
+                transform: translateY(-7.5px) translateX(2px) rotate(45deg);
+            }
+            &::after {
+                transform: translateY(7.5px) translateX(2px) rotate(-45deg);
+            }
+        }
         .drawerDay {
             display: flex;
             align-items: center;
             gap: 5px;
             font-size: 1.2rem;
             font-weight: 600;
+
             svg {
                 font-size: 1.1rem;
             }
@@ -91,10 +189,10 @@ $drawerWidth: 500px;
         gap: 20px;
         @include var.breakpoint("mobileSM") {
             flex-wrap: wrap;
-            gap:10px;
+            gap: 10px;
         }
         @include var.breakpoint("mobileLG") {
-            gap:10px;
+            gap: 10px;
         }
         width: 100%;
         .choosepayment {
@@ -108,7 +206,7 @@ $drawerWidth: 500px;
         }
         & > button {
             @include var.breakpoint("mobileLG") {
-                font-size: .8rem;
+                font-size: 0.8rem;
             }
             width: 100%;
         }
