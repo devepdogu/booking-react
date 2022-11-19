@@ -8,7 +8,7 @@ today.setDate(today.getDate() - 1);
 
 export const useCalendar = create((set, get) => ({
     blocks: [],
-    showenMonthCount: 3,
+    showenMonthCount: window.screen.width < 1600 ? 2 : 3,
     dates: { checkin: "", checkout: "" },
     getSelectedDatePrices: () =>
         Object.entries(get().priceDates).reduce(
