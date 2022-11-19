@@ -1,0 +1,126 @@
+@use "../../styles/styles.scss" as var;
+$drawerWidth: 500px;
+.drawerContainer {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    backdrop-filter: blur(5px);
+    background-color: rgba(17, 17, 26, 0.9);
+}
+.drawerWrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    position: fixed;
+    max-width: $drawerWidth;
+    height: calc(100% - 80px);
+    width: 100%;
+    padding: 40px 50px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+    background-color: #fff;
+    right: 0;
+    top: 0;
+    transition: all 200ms;
+    animation: drawer 400ms forwards;
+
+    .drawerBody {
+        margin: 30px 0px;
+        overflow-y: scroll;
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        gap: 5px;
+        flex-direction: column;
+        &::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        &::-webkit-scrollbar {
+            width: 3px;
+            background-color: var.getChooseColor(checkInRange);
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: var.getChooseColor(chosen);
+        }
+        .drawerDay {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            svg {
+                font-size: 1.1rem;
+            }
+            p {
+                span {
+                    font-weight: 300;
+                    font-size: 1rem;
+                    color: var.$priceColor;
+                }
+            }
+        }
+    }
+
+    .drawerTitle {
+        margin: 0;
+        font-size: 2rem;
+        small {
+            font-size: 1rem;
+        }
+    }
+
+    
+    .drawerActions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap:20px;
+        width: 100%;
+        .choosepayment{
+            background-color: var.getChooseColor(payment)!important;
+            
+            & , svg{
+                color:black;
+            }
+            font-weight: 500;
+        }
+        & > button {
+            width: 100%;
+        }
+        margin-top: auto;
+    }
+    
+    .drawerClose {
+        position: absolute;
+        right: 30px;
+        padding: 7.5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 400ms;
+        border-radius: 10px;
+        cursor: pointer;
+        & > svg {
+            width: 30px;
+            height: 30px;
+        }
+        &:hover {
+            background-color: var.getChooseColor(checkInRange);
+        }
+    }
+}
+
+@keyframes drawer {
+    from {
+        right: -$drawerWidth;
+    }
+    to {
+        right: 0px;
+    }
+}

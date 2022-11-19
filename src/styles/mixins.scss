@@ -1,0 +1,40 @@
+@use './variable' as var;
+
+@mixin button {
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+        rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    font-family: Inter;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 30px;
+    border-radius: 5px;
+    font-size: 1rem;
+    small {
+        margin-left: 5px;
+    }
+    gap: 7.5px;
+    &,
+    svg {
+        color: white;
+    }
+    svg {
+        transition: all 500ms;
+        margin-left: 10px;
+    }
+    transition: all 500ms;
+    &:not([disabled]):hover {
+        transition: all 500ms;
+        box-shadow: unset;
+        svg {
+            transform: translateX(10px);
+        }
+    }
+    border: 0px;
+    background-color: var.getChooseColor(chosen);
+    cursor: pointer;
+    &[disabled] {
+        opacity: 0.5;
+        cursor: no-drop;
+    }
+}

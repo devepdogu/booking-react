@@ -1,0 +1,4 @@
+@use "../../styles/styles.scss" as var;
+.buttonWrapper {
+    @include var.button;
+}
