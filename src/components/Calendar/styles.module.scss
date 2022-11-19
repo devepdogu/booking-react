@@ -9,6 +9,13 @@
 
 .datePickerContainer {
     transition: transform 400ms;
+    @include var.breakpoint("mobileSM") {
+        width: 100%;
+        & > div{
+            width: calc(100% - 50px);
+            margin: auto;
+        }
+    }
     &.openedDrawer {
         transform: translateX(-50px);
     }
@@ -23,6 +30,9 @@
     min-height: 440px;
     @include var.breakpoint("mobileLG") {
         min-height: 350px;    
+    }
+    @include var.breakpoint("mobileSM") {
+        min-height: 310px;    
     }
     gap: 20px;
     position: relative;
@@ -179,10 +189,13 @@
 
         .WeekMonthWrapper {
             @include var.breakpoint("mobileLG") {
-                grid-template-columns: repeat(7, 45px);
+                grid-template-columns: repeat(7, 50px);
             }
             @include var.breakpoint("mobileSM") {
-                grid-template-columns: repeat(7, 35px);  
+                grid-template-columns: repeat(7, 45px);  
+            }
+            @include var.breakpoint("mobileXS") {
+                grid-template-columns: repeat(7, 30px);  
             }
             grid-template-columns: repeat(7, 70px);
             display: grid;
@@ -258,10 +271,13 @@
         }
         .weekDaysWrapper {
             @include var.breakpoint("mobileLG") {
-                grid-template-columns: repeat(7, 45px);
+                grid-template-columns: repeat(7, 50px);
             }
             @include var.breakpoint("mobileSM") {
-                grid-template-columns: repeat(7, 35px);  
+                grid-template-columns: repeat(7, 45px);  
+            }
+            @include var.breakpoint("mobileXS") {
+                grid-template-columns: repeat(7, 30px);  
             }
             grid-template-columns: repeat(7, 70px);
             column-gap: 5px;

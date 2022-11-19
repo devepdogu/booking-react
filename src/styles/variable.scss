@@ -13,12 +13,12 @@ $chooseColors: (
 $priceColor: #00c700;
 
 $breakpoints: (
-    "mobileSM": 450,
+    "mobileXS": 390,
+    "mobileSM": 460,
     "mobileLG": 620,
     "tablet": 768,
     "laptop": 1300,
 );
-
 
 @function getChooseColor($name) {
     @return map.get($chooseColors, $name);
