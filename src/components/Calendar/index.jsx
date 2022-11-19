@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, useRef } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styles from "./styles.module.scss";
 import { Button } from "src/components";
 import { ReactComponent as LeftArrow } from "src/assets/left.svg";
@@ -50,8 +50,6 @@ export const Calendar = ({
       });
     }
   }, [dates.checkout]);
-
-  const dateRef = useRef();
 
   useEffect(() => {
     const arr = [...nShow];
@@ -121,7 +119,6 @@ export const Calendar = ({
       className={`${styles.datePickerContainer} ${
         opened ? styles.openedDrawer : ""
       }`}
-      ref={dateRef}
       tabIndex={0}
       id="date-picker"
     >
@@ -179,11 +176,15 @@ export const Calendar = ({
 
             <div>
               <p>Giriş</p>
-              <span className={`${styles.choosechosen} ${styles.chooseLogin}`}></span>
+              <span
+                className={`${styles.choosechosen} ${styles.chooseLogin}`}
+              ></span>
             </div>
             <div>
               <p>Çıkış</p>
-              <span className={`${styles.choosechosen} ${styles.chooseExit}`}></span>
+              <span
+                className={`${styles.choosechosen} ${styles.chooseExit}`}
+              ></span>
             </div>
 
             <div>

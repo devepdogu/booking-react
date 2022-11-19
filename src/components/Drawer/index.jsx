@@ -1,4 +1,4 @@
-import { useRef, useEffect, useMemo } from "react";
+import { useRef, useEffect } from "react";
 import { useCalendar, useDrawer } from "src/store";
 import { Button } from "src/components";
 import { X, CalendarPlus } from "phosphor-react";
