@@ -234,6 +234,7 @@ const Months = ({
   const [data, setData] = useState({});
   const [monthAvg, setMonthAvg] = useState(0);
 
+
   useEffect(() => {
     setData(
       getDaysInMonth(
@@ -242,7 +243,8 @@ const Months = ({
         blocks,
         sameDay,
         disablePrevDate,
-        pendingPayments
+        pendingPayments,
+        dates.checkout
       )
     );
   }, [changeMonth, blocks, pendingPayments]);
@@ -453,7 +455,8 @@ function getDaysInMonth(
   blocked,
   sameDay,
   disablePrevDate,
-  pendingPayments
+  pendingPayments,
+  checkout
 ) {
   var date = new Date(year, month, 1);
   var days = [];
@@ -465,8 +468,9 @@ function getDaysInMonth(
   const arr = days.map((ele) => {
     if (blocked.includes(format(ele, DATE_FORMAT))) {
       return {
-        active: false,
+        active: format(ele, DATE_FORMAT) === format(checkout, DATE_FORMAT),
         blocked: true,
+
         day: new Date(ele).getDay(),
         date: new Date(ele).getDate(),
         time: new Date(ele),

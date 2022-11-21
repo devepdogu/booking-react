@@ -37,6 +37,7 @@ export const useCalendar = create((set, get) => ({
         if (checkin === "") return;
         const startDate = new Date(checkin);
         const endDate = new Date(checkout !== "" ? checkout : checkin);
+       
         while (startDate <= endDate) {
             arr.push({ date: format(startDate, DATE_FORMAT), price: get().priceDates[format(startDate, DATE_FORMAT)]?.price ?? 0 });
             startDate.setDate(startDate.getDate() + 1);

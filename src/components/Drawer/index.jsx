@@ -31,6 +31,7 @@ export function Drawer() {
 
   const handlePay = (paytype) => {
     const arr = days.reduce((p, c) => [...p, c.date], []);
+    if (dates.checkout !== "") arr.pop();
     switch (paytype) {
       case "done":
         setBlocks(arr);
@@ -77,21 +78,20 @@ export function Drawer() {
               >
                 {totalData.count} Gece
               </span>
-              {totalData.count > 1 && (
+              {totalData.count > 1 && days && (
                 <div className={styles.arrowMoreInfo} ref={priceMoreRef}>
-                  {days &&
-                    days.map((day, i) => {
-                      const date = new Date(day.date);
-                      return (
-                        <div key={i} className={styles.moreInfoDay}>
-                          <CalendarCheck weight="bold" />
-                          <p>
-                            {date.getDate()} {MONTH_LIST[date.getMonth()]}{" "}
-                            <span>(₺{day.price})</span>
-                          </p>
-                        </div>
-                      );
-                    })}
+                  {days.map((day, i) => {
+                    const date = new Date(day.date);
+                    return (
+                      <div key={i} className={styles.moreInfoDay}>
+                        <CalendarCheck weight="bold" />
+                        <p>
+                          {date.getDate()} {MONTH_LIST[date.getMonth()]}{" "}
+                          <span>(₺{day.price})</span>
+                        </p>
+                      </div>
+                    );
+                  })}
                 </div>
               )}
             </div>
