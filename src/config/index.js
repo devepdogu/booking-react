@@ -1,5 +1,5 @@
 export const DATE_FORMAT = "YYYY-MM-DD";
-export const PRICE_ROW_COUNT = 120;
+export const PRICE_ROW_COUNT = 366;
 export const MONTH_LIST = [
     "Ocak",
     "Şubat",
